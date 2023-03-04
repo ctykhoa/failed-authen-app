@@ -28,3 +28,19 @@ services:
       - LDAP_PASSWORDS=password1,password2
     networks:
       - web-app-network
+
+  db:
+    image: mysql:5.7.40-debian@sha256:d9c40d31d0d3e075e4f13b1d6466b6cc95e57e27d9e88969143afc39d435d699
+    ports:
+      - '3309:3306'
+    volumes:
+      - './openldap_data:/bitnami/open-ldap'
+    environment:
+      - MYSQL_ROOT_PASSWORD=ANSKk08aPEDbFjDO
+      - MYSQL_DATABASE=testing_app
+      - MYSQL_USER=web_admin
+      - MYSQL_PASSWORD=mauFJcuf5dhRMQrjj
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    networks:
+      - web-app-network
