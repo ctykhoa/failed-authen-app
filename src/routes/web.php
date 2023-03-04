@@ -18,7 +18,7 @@ Route::get('/', function () {
     return redirect('/login');
 });
 
-Route::get('/login', function() {
+Route::get('/login', function () {
     return view('login');
 });
 
@@ -28,6 +28,20 @@ Route::get('/home', function () {
     return view('home');
 });
 
-Route::get('/register', function() {
+Route::middleware('check.auth')->group(function () {
+    Route::get('/features', function () {
+        return view('features');
+    });
+
+    Route::get('/pricing', function () {
+        return view('pricing');
+    });
+});
+
+Route::get('/register', function () {
     return view('/register');
 });
+
+Route::post('/register', [AuthController::class, 'register']);
+
+Route::get('/logout', [AuthController::class, 'logout']);

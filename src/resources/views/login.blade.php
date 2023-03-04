@@ -30,8 +30,8 @@
         @endisset
 
         <div class="form-floating">
-            <input name="username" type="text" class="form-control" id="floatingInput" placeholder="name">
-            <label for="floatingInput">Username/Email address</label>
+            <input name="email" type="email" class="form-control" id="floatingInput" placeholder="email">
+            <label for="floatingInput">Email address</label>
         </div>
         <div class="form-floating">
             <input name="password" type="password" class="form-control" id="floatingPassword" placeholder="Password">
@@ -39,9 +39,9 @@
         </div>
 
         <div class="checkbox mb-3">
-            <label>
-                <input type="checkbox" value="remember-me"> Remember me
-            </label>
+{{--            <label>--}}
+{{--                <input type="checkbox" value="remember-me"> Remember me--}}
+{{--            </label>--}}
         </div>
         <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
 

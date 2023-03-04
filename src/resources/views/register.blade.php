@@ -30,16 +30,16 @@
         @endisset
 
         <div class="form-floating">
-            <input name="username" type="text" class="form-control" id="floatingInput" placeholder="name">
-            <label for="floatingInput">Username/Email address</label>
+            <input name="email" type="email" class="form-control" id="floatingInput" placeholder="name">
+            <label for="floatingInput">Email address</label>
         </div>
         <div class="form-floating">
             <input name="password" type="password" class="form-control" id="floatingPassword" placeholder="Password">
             <label for="floatingPassword">Password</label>
         </div>
         <div class="form-floating">
-            <input name="confirm_password" type="password" class="form-control" id="floatingConfirmPassword" placeholder="Password">
-            <label for="floatingConfirmPassword">Confirm Password</label>
+            <input name="password_confirmation" type="password" class="form-control" id="floatingConfirmPassword" placeholder="Password Confirmation">
+            <label for="floatingConfirmPassword">Password Confirmation</label>
         </div>
 
         <button class="w-100 btn btn-lg btn-primary mt-4" type="submit">Register</button>

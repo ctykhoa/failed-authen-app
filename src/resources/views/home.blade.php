@@ -1,25 +1,12 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layout')
 
-    <title>Laravel</title>
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
-            crossorigin="anonymous"></script>
-
-
-    <!-- Fonts -->
-    <link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-
-</head>
-<body class="text-center">
-<main class="form-signin w-25 m-auto">
-    Successfully logged in
-</main>
-</body>
-</html>
+@section('content')
+    <div class="text-center border mt-5 rounded py-5 bg-light">
+        <h1>Home</h1>
+        <p class="text-start px-2 py-2">
+            Loripsum - The best generator I could find because it optionally includes lists, formatting, blockquotes and
+            a bunch of other HTML Pan Ipsum - Gives you the option to generate text with a lot of different word lists
+            Bacon Ipsum - If you want to make your client hungry
+        </p>
+    </div>
+@endsection
