@@ -6,15 +6,24 @@ RUN apt-get update -y \
     && curl -sS https://getcomposer.org/installer -o /tmp/composer-setup.php \
     && HASH=`curl -sS https://composer.github.io/installer.sig` \
     && php -r "if (hash_file('SHA384', '/tmp/composer-setup.php') === '$HASH') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;" \
-    && php /tmp/composer-setup.php --install-dir=/usr/local/bin --filename=composer \
+    && php /tmp/composer-setup.php --install-dir=/usr/local/bin --filename=composer
 
-RUN docker-php-ext-install mysqli pdo pdo_mysql sodium \
-    && docker-php-ext-enable mysqli \
-    && docker-php-ext-enable pdo_mysql \
-    && docker-php-ext-enable sodium \
+RUN docker-php-ext-install mysqli \
+#    && docker-php-ext-enable mysqli \
+#    && docker-php-ext-install pdo \
+#    && docker-php-ext-enable pdo \
+#    && docker-php-ext-enable sodium \
     && a2enmod rewrite
+
+# extension gd
+RUN apt-get install -y \
+    libwebp-dev \
+    libjpeg62-turbo-dev \
+    libpng-dev libxpm-dev \
+    libfreetype6-dev
+RUN docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/  \
+    && docker-php-ext-install gd
 
 COPY web.conf /etc/apache2/sites-available/
 RUN rm -rf /etc/apache2/sites-enabled/000-default.conf \
-    && cp /etc/apache2/sites-available/web.conf /etc/apache2/sites-enabled/web.conf \
-    && service apache2 restart \
+    && cp /etc/apache2/sites-available/web.conf /etc/apache2/sites-enabled/web.conf
