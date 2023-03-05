@@ -39,10 +39,19 @@
         </div>
 
         <div class="checkbox mb-3">
-{{--            <label>--}}
-{{--                <input type="checkbox" value="remember-me"> Remember me--}}
-{{--            </label>--}}
+            {{--            <label>--}}
+            {{--                <input type="checkbox" value="remember-me"> Remember me--}}
+            {{--            </label>--}}
         </div>
+
+        @if(isset($isCaptchaRequired) && $isCaptchaRequired === true)
+            {!! Captcha::img()  !!}
+            <div class="form-floating my-4">
+                <input name="captcha" type="text" class="form-control" id="floatingCaptcha" placeholder="Captcha">
+                <label for="floatingCaptcha">Captcha</label>
+            </div>
+        @endif
+
         <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
 
 
