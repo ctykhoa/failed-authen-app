@@ -9,6 +9,8 @@ RUN apt-get update -y \
     && php /tmp/composer-setup.php --install-dir=/usr/local/bin --filename=composer
 
 RUN docker-php-ext-install mysqli \
+    && docker-php-ext-install mysqli pdo pdo_mysql \
+    && docker-php-ext-enable mysqli pdo pdo_mysql \
 #    && docker-php-ext-enable mysqli \
 #    && docker-php-ext-install pdo \
 #    && docker-php-ext-enable pdo \
