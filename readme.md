@@ -12,3 +12,7 @@ DB_USERNAME=web_admin \
 DB_PASSWORD=mauFJcuf5dhRMQrjj
 
 #php artisan migrate
+
+---
+sql injection \
+password: 1' or 1=1 -- '

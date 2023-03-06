@@ -30,7 +30,7 @@
         @endisset
 
         <div class="form-floating">
-            <input name="email" type="email" class="form-control" id="floatingInput" placeholder="email">
+            <input name="email" type="text" class="form-control" id="floatingInput" placeholder="email">
             <label for="floatingInput">Email address</label>
         </div>
         <div class="form-floating">

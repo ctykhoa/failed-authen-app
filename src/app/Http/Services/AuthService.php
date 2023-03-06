@@ -4,15 +4,23 @@ namespace App\Http\Services;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
 class AuthService
 {
-    public function login(string $email, string $password)
+    public function login($email, $password)
     {
-        $user = User::where('email', $email)->first();
-        if (!$user || !Hash::check($password, $user->password)) {
+        // SQL injection
+        $user = DB::select(DB::raw("SELECT email, password
+                                        FROM users
+                                        WHERE email = '$email'
+                                        AND password = '$password'
+                                        LIMIT 1
+                                        "));
+
+        if (!$user) {
             return 0;
         }
 
