@@ -20,7 +20,7 @@
 <body class="text-center">
 <main class="form-signin w-25 m-auto">
     <form class="mt-5" action="login" method="post">
-        @csrf
+{{--        @csrf--}}
         <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
 
         @isset($errorMessage)
