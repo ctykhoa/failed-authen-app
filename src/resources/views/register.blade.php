@@ -23,9 +23,13 @@
         @csrf
         <h1 class="h3 mb-3 fw-normal">Register</h1>
 
-        @isset($errorMessage)
-            <div class="text text-danger">
-                <span>{{ $errorMessage }}</span>
+        @isset($errors)
+            <div class="text text-start text-danger">
+                <ul>
+                    @foreach($errors as $attr => $error)
+                        <li>{{ implode("\n", $error) }}</li>
+                    @endforeach
+                </ul>
             </div>
         @endisset
 
@@ -38,7 +42,8 @@
             <label for="floatingPassword">Password</label>
         </div>
         <div class="form-floating">
-            <input name="password_confirmation" type="password" class="form-control" id="floatingConfirmPassword" placeholder="Password Confirmation">
+            <input name="password_confirmation" type="password" class="form-control" id="floatingConfirmPassword"
+                   placeholder="Password Confirmation">
             <label for="floatingConfirmPassword">Password Confirmation</label>
         </div>
 

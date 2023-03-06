@@ -62,7 +62,7 @@ class AuthController extends Controller
             $errors = $validator->errors();
 
             return view('register', [
-                'errors' => $errors,
+                'errors' => $errors->messages(),
             ]);
         }
 
