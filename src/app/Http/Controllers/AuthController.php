@@ -20,34 +20,17 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        // Check captcha if failed attempt >= 3
-        $maxFailureAccepted = env('FAILED_LOG_IN_ATTEMPT', 3);
-        $failedLoginAttempt = Session::get('failedLoginAttempt');
-        if ($failedLoginAttempt >= $maxFailureAccepted) {
-            // Validate captcha
-            $isValidCaptcha = !Validator::make([
-                'captcha' => $request->get('captcha'),
-            ], ['captcha' => ['required', 'captcha',],
-            ])->fails();
+        $email = $request->get('email');
+        $password = $request->get('password');
+
+        if ($this->authService->login($email, $password)) {
+            return redirect()->intended('/home');
         }
 
-        if (!isset($isValidCaptcha) || $isValidCaptcha === true) {
-            $email = $request->get('email');
-            $password = $request->get('password');
-
-            if ($this->authService->login($email, $password)) {
-                Session::put('failedLoginAttempt', 0);
-                return redirect()->intended('/home');
-            }
-        }
-        $newValueOfAttempt = empty($failedLoginAttempt) ? 1 : ++$failedLoginAttempt;
-        Session::put('failedLoginAttempt', $newValueOfAttempt);
-        $isCaptchaRequired = $failedLoginAttempt >= $maxFailureAccepted;
-        $errorMessage = (isset($isValidCaptcha) && $isValidCaptcha === false) ? 'Incorrect captcha' : 'Invalid login';
+        $errorMessage = 'Invalid login';
 
         return view('login', [
             'errorMessage' => $errorMessage,
-            'isCaptchaRequired' => $isCaptchaRequired,
         ]);
     }
 
