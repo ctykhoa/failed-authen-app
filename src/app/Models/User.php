@@ -46,14 +46,18 @@ class User extends Authenticatable
 
     public function updateUser($data)
     {
+        $updatedData = [];
+        if (isset($data['email'])) {
+            $updatedData['email'] = $data['email'];
+        }
+        if (isset($data['phone'])) {
+            $updatedData['phone'] = $data['phone'];
+        }
+        if (isset($data['shipping_address'])) {
+            $updatedData['shipping_address'] = $data['shipping_address'];
+        }
         return $this->where('id', $data['id'])
-            ->update(
-                [
-                    'email' => $data['email'],
-                    'phone' => $data['phone'],
-                    'shipping_address' => $data['shipping_address'],
-                ]
-            );
+            ->update($updatedData);
     }
 
 }
