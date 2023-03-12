@@ -27,7 +27,8 @@
                     <a class="nav-link {{ Request::path() == 'home' ? 'active' : '' }}" href="/home">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ Request::path() == 'features' ? 'active' : '' }}" href="/features">Features</a>
+                    <a class="nav-link {{ Request::path() == 'features' ? 'active' : '' }}"
+                       href="/features">Features</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ Request::path() == 'pricing' ? 'active' : '' }}" href="/pricing">Pricing</a>
@@ -36,7 +37,9 @@
         </div>
 
         @if(Session::get('username'))
-            {{ 'Logged as: '.Session::get('username') }}
+            <a href="/profile" class="btn-btn-link">
+                {{ Session::get('username') }}
+            </a>
             <a href="/logout" class="btn btn-link">Log out</a>
         @else
             <a href="/login" class="btn btn-link">Log in</a>
@@ -50,7 +53,6 @@
     </div>
 
     @yield('content')
-
 
 
 </main>

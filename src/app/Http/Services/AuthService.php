@@ -9,16 +9,19 @@ use Illuminate\Support\Facades\Session;
 
 class AuthService
 {
-    public function login(string $email, string $password)
+    public function login(string $username, string $password)
     {
-        $user = User::where('email', $email)->first();
+        $user = User::where('username', $username)
+            ->select('username', 'email', 'password', 'id')
+            ->first();
         if (!$user || !Hash::check($password, $user->password)) {
             return 0;
         }
 
         $userCookie = Hash::make('myapp' . Session::token());
         Cookie::queue('user', $userCookie, 60);
-        Session::put('username', explode('@', $email)[0]);
+        Session::put('username', $username);
+        Session::put('user_id', $user->id);
 
         return 1;
     }
@@ -28,6 +31,7 @@ class AuthService
         Cookie::queue(Cookie::forget('user'));
         Session::regenerateToken();
         Session::forget('username');
+        Session::forget('user_id');
 
         return true;
     }

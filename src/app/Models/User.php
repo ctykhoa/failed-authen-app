@@ -18,9 +18,11 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'username',
         'email',
         'password',
+        'phone',
+        'shipping_address',
     ];
 
     /**
@@ -41,4 +43,17 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function updateUser($data)
+    {
+        return $this->where('id', $data['id'])
+            ->update(
+                [
+                    'email' => $data['email'],
+                    'phone' => $data['phone'],
+                    'shipping_address' => $data['shipping_address'],
+                ]
+            );
+    }
+
 }

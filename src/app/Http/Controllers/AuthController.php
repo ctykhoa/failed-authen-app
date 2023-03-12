@@ -32,10 +32,10 @@ class AuthController extends Controller
         }
 
         if (!isset($isValidCaptcha) || $isValidCaptcha === true) {
-            $email = $request->get('email');
+            $username = $request->get('username');
             $password = $request->get('password');
 
-            if ($this->authService->login($email, $password)) {
+            if ($this->authService->login($username, $password)) {
                 Session::put('failedLoginAttempt', 0);
                 return redirect()->intended('/home');
             }
@@ -54,7 +54,10 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         $validator = Validator::make($request->input(), [
+            'username' => 'required|string|unique:App\Models\User,username',
             'email' => 'required|email|unique:App\Models\User,email',
+            'phone' => 'required|numeric|min:10|max:14|unique:App\Models\User,phone',
+            'shipping_address' => 'string|max:500',
             'password' => ['required', 'confirmed', Password::min(8)],
         ]);
 
@@ -69,9 +72,16 @@ class AuthController extends Controller
         // Create user
         $email = $request->get('email');
         $password = $request->get('password');
+        $username = $request->get('username');
+        $email = $request->get('email');
+        $phone = $request->get('phone');
+        $shippingAddress = $request->get('shipping_address') ?? null;
 
         $newUser = new User();
         $newUser->email = $email;
+        $newUser->username = $username;
+        $newUser->phone = $phone;
+        $newUser->shipping_address = $shippingAddress;
         $newUser->password = Hash::make($password);
 
         $newUser->save();

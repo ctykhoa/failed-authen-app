@@ -30,8 +30,8 @@
         @endisset
 
         <div class="form-floating">
-            <input name="email" type="email" class="form-control" id="floatingInput" placeholder="email">
-            <label for="floatingInput">Email address</label>
+            <input name="username" type="text" class="form-control" id="floatingInput" placeholder="username">
+            <label for="floatingInput">Username</label>
         </div>
         <div class="form-floating">
             <input name="password" type="password" class="form-control" id="floatingPassword" placeholder="Password">

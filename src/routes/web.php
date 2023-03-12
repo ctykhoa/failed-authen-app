@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,7 +16,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return redirect('/login');
+    return redirect('/home');
+});
+
+Route::get('/home', function () {
+    return view('home');
 });
 
 Route::get('/login', function () {
@@ -23,10 +28,6 @@ Route::get('/login', function () {
 });
 
 Route::post('/login', [AuthController::class, 'login']);
-
-Route::get('/home', function () {
-    return view('home');
-});
 
 Route::middleware('check.auth')->group(function () {
     Route::get('/features', function () {
@@ -36,6 +37,12 @@ Route::middleware('check.auth')->group(function () {
     Route::get('/pricing', function () {
         return view('pricing');
     });
+
+    // Profile
+    Route::get('/profile', [UserController::class, 'viewProfile']);
+
+    // edit profile
+    Route::match(['get', 'post'], '/editProfile', [UserController::class, 'editProfile']);
 });
 
 Route::get('/register', function () {
